@@ -1,9 +1,22 @@
+#
+
 @System = new Mongo.Collection 'system'
 
-unless do System.findOne
+#
 
-	System.insert
-		init: true
+Meteor.methods
+
+	updateTotalAmountIncoming: (opt) ->
+		System.update { init: true },
+			$inc:
+				'statistics.totalAmountIncoming': opt
+
+	updateTotalAmountOutcoming: (opt) ->
+		System.update { init: true },
+			$inc:
+				'statistics.totalAmountOutcoming': opt
+
+#
 
 if Meteor.isClient
 

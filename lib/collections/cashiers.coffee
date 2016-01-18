@@ -103,14 +103,10 @@ Cashiers.attachSchema new SimpleSchema cashiersSchema
 
 Cashiers.after.insert (userId, doc) ->
 	if doc.type is '流入'
-		System.update { init: true },
-			$inc:
-				'statistics.totalAmountIncoming': doc.amount
+		Meteor.isServer and Meteor.call 'updateTotalAmountIncoming', doc.amount
 
 	if doc.type is '流出'
-		System.update { init: true },
-			$inc:
-				'statistics.totalAmountOutcoming': doc.amount
+		Meteor.isServer and Meteor.call 'updateTotalAmountOutcoming', doc.amount
 
 #
 
@@ -150,6 +146,10 @@ Cashiers.table = new Tabular.Table
 			title: cashiersSchema.amount.label
 			render: (val, type, doc) -> "￥#{val.format(2)}"
 		}
+		{
+			title: '操作'
+			tmpl: Meteor.isClient && Template.cashiersTableAction
+		}
 	]
 
 	searchDelay: 150
@@ -157,6 +157,9 @@ Cashiers.table = new Tabular.Table
 	autoWidth: false
 
 	paging: false
+
+	# search:
+	# 	smart: true
 
 	footerCallback: (tfoot, data, start, end, display) ->
 
@@ -208,3 +211,10 @@ Cashiers.findCashiers = (selector, options) ->
 		console.log Cashiers.find(_selector, _options).fetch()
 
 		Cashiers.find _selector, _options
+
+
+if Meteor.isClient
+
+	AutoForm.hooks
+		insertCashierForm:
+			onSuccess: -> Router.go 'home'

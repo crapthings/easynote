@@ -2,11 +2,21 @@ template(name='home')
 
 	+filterResult
 
+	.form-group.has-feedback.mgb
+
+		label.control-label.sr-only
+
+		input.form-control(name='daterange')
+
+		span.form-control-feedback.glyphicon.glyphicon-calendar
+
+		span.sr-only
+
 	.panel.panel-primary
 
 		.panel-heading {{title}}
 
-		+tabular table=tables.cashiers class='table table-striped table-bordered table-hover table-condensed'
+		+tabular table=tables.cashiers selector=cashiersSelector class='table table-striped table-bordered table-hover table-condensed'
 
 template(name='filterResult')
 

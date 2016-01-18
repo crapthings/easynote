@@ -1,0 +1,21 @@
+template(name='layout')
+
+	nav.navbar.navbar-default.navbar-fixed-top#ui-navbar
+
+		.container-fluid
+
+			ul.nav.navbar-nav
+
+				li(class='{{isActiveRoute name="home"}}')
+
+					a(href='{{pathFor route="home"}}') 首页
+
+				li(class='{{isActiveRoute name="newCashier"}}')
+
+					a(href='{{pathFor route="newCashier"}}') 增加
+
+	.container-fluid(style='margin-top: 60px;')
+
+		h3.page-header {{title}}
+
+		+yield

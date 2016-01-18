@@ -1,0 +1,85 @@
+template(name='cashierList')
+
+	.panel.panel-primary
+
+		.panel-heading {{title}}
+
+		table.table.table-striped.table-bordered.table-hover.table-condensed
+
+			thead
+				+cashierTableHead
+
+			tfoot
+				+cashierTableHead
+				+cashierTableHeadSub
+
+			tbody
+				+cashierItem
+
+template(name='cashierItem')
+
+	each cashiers
+
+		tr
+
+			td= no1
+
+			td= no2
+
+			td.text-center
+				span(class='label label-{{typeClass}}')= type
+
+			td= source
+
+			td= account
+
+			td= title
+
+			td.text-right ￥{{formatNumber amount}}
+
+			td= memo
+
+			td.text-center
+
+				.btn-group
+
+					a.btn.btn-xs.btn-info(href='{{pathFor route="updateCashier"}}')
+						i.fa.fa-edit
+
+					a.btn.btn-xs.btn-danger.method-remove-cashier
+						i.fa.fa-trash
+
+template(name='cashierTableHead')
+
+	tr
+		th(width='80px')
+			small 凭证编号
+		th(width='80px')
+			small 出纳编号
+		th(width='60px') 类型
+		th(width='80px') 资金类型
+		th(width='60px') 账户
+		th 项目
+		th 金额
+		th 备注
+		th(width='120px') 操作
+
+template(name='cashierTableHeadSub')
+
+	tr
+		th(colspan='6')
+		th.text-right
+			div
+				span.label.label-danger {{formatNumber totalAmountIncoming}}
+			div
+				span.label.label-info {{formatNumber totalAmountOutcoming}}
+		th
+		th
+
+template(name='newCashier')
+
+	+quickForm collection='Cashiers' id='insertCashierForm' type='insert' omitFields='createdAt' template='bootstrap3-horizontal' label-class='col-sm-2' input-col-class='col-sm-10' buttonContent='提交'
+
+template(name='updateCashier')
+
+	+quickForm collection='Cashiers' doc=cashier id='updateCashierForm' type='update' omitFields='createdAt' template='bootstrap3-horizontal' label-class='col-sm-2' input-col-class='col-sm-10' buttonContent='提交'

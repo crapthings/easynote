@@ -1,0 +1,33 @@
+template(name='home')
+
+	+filterResult
+
+	.panel.panel-primary
+
+		.panel-heading {{title}}
+
+		+tabular table=tables.cashiers class='table table-striped table-bordered table-hover table-condensed'
+
+template(name='filterResult')
+
+	.row
+
+		.col-md-3
+			.well.text-right
+				h3.text-danger ￥{{formatNumber totalAmountIncoming}}
+				h5 流入
+
+		.col-md-3
+			.well.text-right
+				h3.text-info ￥{{formatNumber totalAmountOutcoming}}
+				h5 流出
+
+		.col-md-3
+			.well.text-right
+				h3 ￥{{formatNumber system.statistics.totalAmountIncoming}}
+				h5 流入统计
+
+		.col-md-3
+			.well.text-right
+				h3 ￥{{formatNumber system.statistics.totalAmountOutcoming}}
+				h5 流出统计

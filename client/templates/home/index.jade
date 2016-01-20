@@ -2,15 +2,7 @@ template(name='home')
 
 	+filterResult
 
-	.form-group.has-feedback.mgb
-
-		label.control-label.sr-only
-
-		input.form-control(name='daterange')
-
-		span.form-control-feedback.glyphicon.glyphicon-calendar
-
-		span.sr-only
+	+homeActionBar
 
 	.panel.panel-primary
 
@@ -41,3 +33,53 @@ template(name='filterResult')
 			.well.text-right
 				h3 ￥{{formatNumber system.statistics.totalAmountOutcoming}}
 				h5 流出统计
+
+template(name='homeActionBar')
+
+	.form-inline.mgb
+
+		.form-group.has-feedback
+
+			label.control-label.sr-only
+
+			input.form-control#dateRangePicker(style='font-size: 12px;')
+
+			span.form-control-feedback.glyphicon.glyphicon-calendar
+
+			span.sr-only
+
+		.form-group
+
+			.btn-toolbar
+
+				.btn-group
+
+					button.btn.btn-default.method-prev-year
+						i.fa.fa-angle-left
+
+					button.btn.btn-default.method-reset-year {{formatDateFromSession 'selectYear' 'YYYY'}}
+
+					button.btn.btn-default.method-next-year
+						i.fa.i.fa.fa-angle-right
+
+				.btn-group
+
+					button.btn.btn-default.method-prev-month
+						i.fa.fa-angle-left
+
+					button.btn.btn-default.method-reset-month {{formatDateFromSession 'selectMonth' 'YYYY.MM'}}
+
+					button.btn.btn-default.method-next-month
+						i.fa.i.fa.fa-angle-right
+
+				.btn-group
+
+					button.btn.btn-default.method-prev-day
+						i.fa.fa-angle-left
+
+					button.btn.btn-default.method-reset-day {{formatDateFromSession 'selectDay' 'YYYY.MM.DD'}}
+
+					button.btn.btn-default.method-next-day
+						i.fa.i.fa.fa-angle-right
+
+

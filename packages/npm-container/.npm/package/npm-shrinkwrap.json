@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "faker": {
-      "version": "3.0.1"
+      "version": "3.0.1",
+      "resolved": "https://registry.npmjs.org/faker/-/faker-3.0.1.tgz",
+      "from": "faker@3.0.1"
     }
   }
 }
